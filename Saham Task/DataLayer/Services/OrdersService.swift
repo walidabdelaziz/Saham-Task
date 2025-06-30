@@ -6,7 +6,7 @@
 //
 
 protocol OrdersService {
-    func getOrders() async throws -> OrdersResponse
+    func getOrders() async throws -> [Order]
 }
 
 class OrdersServiceImpl: OrdersService {
@@ -16,13 +16,13 @@ class OrdersServiceImpl: OrdersService {
         self.networkService = networkService
     }
 
-    func getOrders() async throws -> OrdersResponse {
+    func getOrders() async throws -> [Order] {
         return try await networkService.request(
             method: .get,
             url: Constants.ORDERS,
             headers: [:],
             params: nil,
-            of: OrdersResponse.self
+            of: [Order].self
         )
     }
 }

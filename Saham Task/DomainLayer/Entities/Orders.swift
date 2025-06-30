@@ -5,14 +5,6 @@
 //  Created by Walid Ahmed on 30/06/2025.
 //
 
-struct OrdersResponse: Codable {
-    var data: [Order]?
-    
-    enum CodingKeys: String, CodingKey {
-        case data = "data"
-    }
-}
-
 struct Order: Codable, Hashable {
     var id: Int?
     var customerName: String?

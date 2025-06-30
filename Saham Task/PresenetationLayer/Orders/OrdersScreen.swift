@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct OrdersScreen: View {
+    @State var selectedOrder: Order?
     @State var orderViewModel = OrdersViewModel(ordersService: OrdersServiceImpl(networkService: NetworkManager()))
     
     var body: some View {
@@ -19,12 +20,17 @@ struct OrdersScreen: View {
                     LazyVStack(spacing: 14) {
                         ForEach(orderViewModel.orders, id: \.self) { order in
                             OrdersCell(order: order)
+                                .onTapGesture {
+                                    selectedOrder = order
+                                }
                         }
                     }
-
                 }
             }
             .navigationTitle("Orders")
+            .navigationDestination(item: $selectedOrder) { order in
+                OrderDetailsScreen(selectedOrder: order)
+            }
         }
     }
 }

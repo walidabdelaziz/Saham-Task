@@ -23,7 +23,7 @@ import SwiftUI
         isLoading = true
         do {
             let result = try await ordersService.getOrders()
-            orders = result.data ?? []
+            orders = result
         } catch {
             print("Failed to fetch orders: \(error)")
         }
