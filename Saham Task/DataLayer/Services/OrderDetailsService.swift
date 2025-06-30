@@ -1,28 +1,28 @@
 //
-//  OrdersService.swift
+//  OrderDetailsService.swift
 //  Saham Task
 //
 //  Created by Walid Ahmed on 30/06/2025.
 //
 
-protocol OrdersService {
-    func getOrders() async throws -> [Order]
+protocol OrderDetailsService {
+    func getOrderDetails(id: Int) async throws -> Order
 }
 
-class OrdersServiceImpl: OrdersService {
+class OrderDetailsServiceImpl: OrderDetailsService {
     private let networkService: NetworkService
 
     init(networkService: NetworkService = NetworkManager()) {
         self.networkService = networkService
     }
 
-    func getOrders() async throws -> [Order] {
+    func getOrderDetails(id: Int) async throws -> Order {
         return try await networkService.request(
             method: .get,
-            url: Constants.ORDERS,
+            url: "\(Constants.ORDERS)/\(id)",
             headers: [:],
             params: nil,
-            of: [Order].self
+            of: Order.self
         )
     }
 }

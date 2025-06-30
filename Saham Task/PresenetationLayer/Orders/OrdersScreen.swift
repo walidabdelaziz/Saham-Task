@@ -9,7 +9,7 @@ import SwiftUI
 
 struct OrdersScreen: View {
     @State var selectedOrder: Order?
-    @State var orderViewModel = OrdersViewModel(ordersService: OrdersServiceImpl(networkService: NetworkManager()))
+    @State var orderViewModel = OrdersViewModel(ordersService: OrdersServiceImpl())
     
     var body: some View {
         NavigationStack{
