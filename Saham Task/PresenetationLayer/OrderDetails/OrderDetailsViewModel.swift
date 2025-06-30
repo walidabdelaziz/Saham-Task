@@ -12,10 +12,14 @@ import SwiftUI
     var isLoading: Bool = false
 
     private let orderDetailsService: OrderDetailsService
+    private let webSocketUseCase: OrdersWebSocketUseCase
+
     
-    init(orderDetailsService: OrderDetailsService) {
+    init(orderDetailsService: OrderDetailsService, webSocketUseCase: OrdersWebSocketUseCase = OrdersWebSocketUseCaseImpl()) {
         self.orderDetailsService = orderDetailsService
+        self.webSocketUseCase = webSocketUseCase
     }
+
     @MainActor
     func getOrderDetails(id: Int) async {
         isLoading = true
@@ -27,4 +31,16 @@ import SwiftUI
         }
         isLoading = false
     }
+
+    func connectToWebSocket(orderId: Int) {
+        webSocketUseCase.connect(orderId: orderId) { [weak self] updatedOrder in
+            guard let self = self else{return}
+            self.order = updatedOrder
+        }
+    }
+    func disconnectFromWebSocket() {
+        webSocketUseCase.disconnect()
+    }
 }
+
+

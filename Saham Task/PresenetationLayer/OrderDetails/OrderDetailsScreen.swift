@@ -10,7 +10,7 @@ import SwiftUI
 struct OrderDetailsScreen: View {
     let selectedOrder: Order
     @State var orderDetilasViewModel = OrderDetailsViewModel(orderDetailsService: OrderDetailsServiceImpl())
-
+    
     var body: some View {
         ScrollView{
             if orderDetilasViewModel.isLoading{
@@ -21,10 +21,14 @@ struct OrderDetailsScreen: View {
             }
         }
         .onAppear {
-                Task{
-                    await orderDetilasViewModel.getOrderDetails(id: selectedOrder.id ?? 0)
-                }
+            Task{
+                await orderDetilasViewModel.getOrderDetails(id: selectedOrder.id ?? 0)
+                orderDetilasViewModel.connectToWebSocket(orderId: selectedOrder.id ?? 0)
             }
+        }
+        .onDisappear {
+            orderDetilasViewModel.disconnectFromWebSocket()
+        }
     }
 }
 
