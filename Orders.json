@@ -1,0 +1,256 @@
+{
+  "uuid": "221ba1ca-5e00-45c9-8aed-74bd23eae80c",
+  "lastMigration": 33,
+  "name": "Orders",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3001,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "cd4597b5-630c-4d85-869c-a5ddbc2e26a8",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "orders",
+      "responses": [
+        {
+          "uuid": "445b4f36-9e3a-4c78-8248-34aad84e6886",
+          "body": "[\n  {\n    \"id\": 1,\n    \"customerName\": \"Alice\",\n    \"restaurant\": \"Pizza Palace\",\n    \"status\": \"Preparing\"\n  },\n  {\n    \"id\": 2,\n    \"customerName\": \"Bob\",\n    \"restaurant\": \"Burger Town\",\n    \"status\": \"Out for delivery\"\n  },\n  {\n    \"id\": 3,\n    \"customerName\": \"Charlie\",\n    \"restaurant\": \"Sushi Central\",\n    \"status\": \"Delivered\"\n  },\n  {\n    \"id\": 4,\n    \"customerName\": \"Diana\",\n    \"restaurant\": \"Curry House\",\n    \"status\": \"Pending\"\n  },\n  {\n    \"id\": 5,\n    \"customerName\": \"Ethan\",\n    \"restaurant\": \"Taco Tower\",\n    \"status\": \"Preparing\"\n  },\n  {\n    \"id\": 6,\n    \"customerName\": \"Fiona\",\n    \"restaurant\": \"Noodle Nest\",\n    \"status\": \"Cancelled\"\n  }\n]\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "e8fa2b1d-c4a2-48d4-84af-bb7a4b307bd2",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "orders/:id",
+      "responses": [
+        {
+          "uuid": "2635ee4c-7cda-4e18-ae5a-2d2cee9c3b6e",
+          "body": "{{#if (eq (urlParam 'id') '1')}}\n  {\n    \"id\": 1,\n    \"customerName\": \"Alice\",\n    \"restaurant\": \"Pizza Palace\",\n    \"status\": \"Preparing\"\n  }\n{{else if (eq (urlParam 'id') '2')}}\n  {\n    \"id\": 2,\n    \"customerName\": \"Bob\",\n    \"restaurant\": \"Burger Town\",\n    \"status\": \"Out for delivery\"\n  }\n{{else if (eq (urlParam 'id') '3')}}\n  {\n    \"id\": 3,\n    \"customerName\": \"Charlie\",\n    \"restaurant\": \"Sushi Corner\",\n    \"status\": \"Delivered\"\n  }\n  {{else if (eq (urlParam 'id') '4')}}\n {\n    \"id\": 4,\n    \"customerName\": \"Diana\",\n    \"restaurant\": \"Curry House\",\n    \"status\": \"Pending\"\n  }\n  {{else if (eq (urlParam 'id') '5')}}\n  {\n    \"id\": 5,\n    \"customerName\": \"Ethan\",\n    \"restaurant\": \"Taco Tower\",\n    \"status\": \"Preparing\"\n  }\n  {{else if (eq (urlParam 'id') '6')}}\n  {\n    \"id\": 6,\n    \"customerName\": \"Fiona\",\n    \"restaurant\": \"Noodle Nest\",\n    \"status\": \"Cancelled\"\n  }\n{{else}}\n  {\n    \"error\": \"Order not found\"\n  }\n{{/if}}\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "order_id",
+              "value": "1",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "ab0aff6b-c4c8-48b7-a99f-69609ccc41ab",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "39f498d7-4df8-4394-abae-99cfecd8a90d",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "a94c5e18-baf6-4ecc-9fc2-5669b8cd2f20",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "0df76b26-a442-4102-aaed-2e04313d4796",
+      "type": "ws",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "orders/updates",
+      "responses": [
+        {
+          "uuid": "7e72e1b9-9801-47c0-ad5f-ee870e49e091",
+          "body": "[\n  {\n    \"id\": 1,\n    \"customerName\": \"Alice\",\n    \"restaurant\": \"Pizza Palace\",\n    \"status\": \"Preparing\"\n  },\n  {\n    \"id\": 2,\n    \"customerName\": \"Bob\",\n    \"restaurant\": \"Burger Town\",\n    \"status\": \"Out of delivery\"\n  },\n  {\n    \"id\": 3,\n    \"customerName\": \"Charlie\",\n    \"restaurant\": \"Sushi Corner\",\n    \"status\": \"Delivered\"\n  }\n]\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "DATABUCKET",
+          "filePath": "",
+          "databucketID": "7t2q",
+          "sendFileAsBody": true,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "076fc4c3-89bf-4245-bbab-e0568bd19404",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": "BROADCAST",
+      "streamingInterval": 1000
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "cd4597b5-630c-4d85-869c-a5ddbc2e26a8"
+    },
+    {
+      "type": "route",
+      "uuid": "e8fa2b1d-c4a2-48d4-84af-bb7a4b307bd2"
+    },
+    {
+      "type": "route",
+      "uuid": "0df76b26-a442-4102-aaed-2e04313d4796"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [
+    {
+      "uuid": "1d93296a-c338-44b4-9a90-08e4917ab706",
+      "id": "7t2q",
+      "name": "New data",
+      "documentation": "",
+      "value": "[\n  {\n    \"id\": 1,\n    \"customerName\": \"Alice\",\n    \"restaurant\": \"Pizza Palace\",\n    \"status\": \"Preparing\"\n  },\n  {\n    \"id\": 2,\n    \"customerName\": \"Bob\",\n    \"restaurant\": \"Burger Town\",\n    \"status\": \"Out for delivery\"\n  },\n  {\n    \"id\": 3,\n    \"customerName\": \"Charlie\",\n    \"restaurant\": \"Sushi Corner\",\n    \"status\": \"Delivered\"\n  },\n {\n    \"id\": 4,\n    \"customerName\": \"Diana\",\n    \"restaurant\": \"Curry House\",\n    \"status\": \"Pending\"\n  },\n  {\n    \"id\": 5,\n    \"customerName\": \"Ethan\",\n    \"restaurant\": \"Taco Tower\",\n    \"status\": \"Preparing\"\n  },\n  {\n    \"id\": 6,\n    \"customerName\": \"Fiona\",\n    \"restaurant\": \"Noodle Nest\",\n    \"status\": \"Cancelled\"\n  }\n]\n"
+    }
+  ],
+  "callbacks": []
+}
