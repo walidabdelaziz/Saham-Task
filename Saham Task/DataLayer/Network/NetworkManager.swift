@@ -28,7 +28,7 @@ actor NetworkManager: NetworkService {
     func request<T: Decodable>(
         method: HTTPMethod,
         url: String,
-        headers: [String: String] = [:],
+        headers: [String: String],
         params: [String: Any]?,
         of type: T.Type
     ) async throws -> T {
@@ -53,6 +53,7 @@ actor NetworkManager: NetworkService {
             throw URLError(.badServerResponse)
         }
 
+        print("🧾 Response Body: \(try JSONDecoder().decode(T.self, from: data))")
         return try JSONDecoder().decode(T.self, from: data)
     }
 }
