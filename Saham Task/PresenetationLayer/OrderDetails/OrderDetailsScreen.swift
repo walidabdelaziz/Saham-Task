@@ -9,8 +9,22 @@ import SwiftUI
 
 struct OrderDetailsScreen: View {
     let selectedOrder: Order
+    @State var orderDetilasViewModel = OrderDetailsViewModel(orderDetailsService: OrderDetailsServiceImpl())
+
     var body: some View {
-        Text(selectedOrder.customerName ?? "")
+        ScrollView{
+            if orderDetilasViewModel.isLoading{
+                ProgressView()
+            }else{
+                OrdersCell(order: orderDetilasViewModel.order)
+                    .padding(.vertical)
+            }
+        }
+        .onAppear {
+                Task{
+                    await orderDetilasViewModel.getOrderDetails(id: selectedOrder.id ?? 0)
+                }
+            }
     }
 }
 
