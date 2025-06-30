@@ -30,7 +30,7 @@ struct OrdersCell: View {
             Text(order.status ?? "")
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
-                .padding()
+                .padding(.vertical, 8)
                 .background(colorForStatus(order.status))
                 .cornerRadius(12)
         }
