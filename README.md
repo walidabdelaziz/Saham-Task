@@ -49,5 +49,5 @@
 
 ## 🧪 Mock API Setup (Mockoon)
 
-1. **Install [Mockoon]
-2. Import the provided Orders file to quickly set up REST and WebSocket endpoints, You can find the file in the project root directory: Orders.json 
+- Install [Mockoon]
+- Import the provided Orders.json file to Mockoon, You can find the file in the project root directory.
