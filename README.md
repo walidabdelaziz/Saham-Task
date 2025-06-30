@@ -49,5 +49,5 @@
 
 ## 🧪 Mock API Setup (Mockoon)
 
-- Install [Mockoon]
+- Install [Mockoon](https://mockoon.com/)
 - Import the provided Orders.json file to Mockoon, You can find the file in the project root directory.
