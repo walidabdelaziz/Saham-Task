@@ -13,7 +13,7 @@ struct OrdersResponse: Codable {
     }
 }
 
-struct Order: Codable {
+struct Order: Codable, Hashable {
     var id: Int?
     var customerName: String?
     var restaurant: String?

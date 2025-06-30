@@ -9,10 +9,23 @@ import SwiftUI
 
 struct OrdersScreen: View {
     @State var orderViewModel = OrdersViewModel(ordersService: OrdersServiceImpl(networkService: NetworkManager()))
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-        
-            .navigationBarBackButtonHidden()
+        NavigationStack{
+            ScrollView{
+                if orderViewModel.isLoading{
+                    ProgressView()
+                }else{
+                    LazyVStack(spacing: 14) {
+                        ForEach(orderViewModel.orders, id: \.self) { order in
+                            OrdersCell(order: order)
+                        }
+                    }
+
+                }
+            }
+            .navigationTitle("Orders")
+        }
     }
 }
 
