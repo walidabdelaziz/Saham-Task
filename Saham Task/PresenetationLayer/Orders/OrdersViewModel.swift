@@ -14,9 +14,6 @@ import SwiftUI
     
     init(ordersService: OrdersService) {
         self.ordersService = ordersService
-        Task {
-             await getOrders()
-        }
     }
     @MainActor
     func getOrders() async {

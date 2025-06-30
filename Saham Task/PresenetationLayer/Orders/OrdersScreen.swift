@@ -12,24 +12,29 @@ struct OrdersScreen: View {
     @State var orderViewModel = OrdersViewModel(ordersService: OrdersServiceImpl())
     
     var body: some View {
-        NavigationStack{
-            ScrollView{
-                if orderViewModel.isLoading{
-                    ProgressView()
-                }else{
-                    LazyVStack(spacing: 14) {
-                        ForEach(orderViewModel.orders, id: \.self) { order in
-                            OrdersCell(order: order)
-                                .onTapGesture {
-                                    selectedOrder = order
-                                }
-                        }
+        ScrollView{
+            if orderViewModel.isLoading{
+                ProgressView()
+            }else{
+                LazyVStack(spacing: 14) {
+                    ForEach(orderViewModel.orders, id: \.self) { order in
+                        OrdersCell(order: order)
+                            .onTapGesture {
+                                selectedOrder = order
+                            }
                     }
                 }
             }
-            .navigationTitle("Orders")
-            .navigationDestination(item: $selectedOrder) { order in
-                OrderDetailsScreen(selectedOrder: order)
+        }
+        .navigationBarBackButtonHidden()
+        .navigationTitle("Orders")
+        .navigationBarTitleDisplayMode(.large)
+        .navigationDestination(item: $selectedOrder) { order in
+            OrderDetailsScreen(selectedOrder: order)
+        }
+        .onAppear {
+            Task{
+                await orderViewModel.getOrders()
             }
         }
     }
