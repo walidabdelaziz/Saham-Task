@@ -11,7 +11,7 @@ import SwiftUI
 struct Saham_TaskApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SplashScreen()
         }
     }
 }
